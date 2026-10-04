@@ -67,7 +67,13 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 NEXT_PUBLIC_API_URL=http://localhost:3000
 ```
 
-If you later add a real AI provider, you can also add keys for that provider in the same file.
+For the Groq-powered event assistant, add your Groq API key as a server-only variable:
+
+```env
+GROQ_API_KEY=your-groq-api-key
+```
+
+The key is only read by the server API route and must not use a `NEXT_PUBLIC_` prefix.
 
 ## 3) Set up Supabase
 ### Create a Supabase project
@@ -187,6 +193,7 @@ Deploy only after:
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `NEXT_PUBLIC_API_URL`
+   - `GROQ_API_KEY`
 4. Deploy the project
 5. After deployment, confirm the production URL is added to Supabase redirect settings
 
@@ -208,7 +215,7 @@ Before going live, confirm:
 - `npm run build` succeeds in CI or on the deploy platform
 
 ## 8) Notes about the AI assistant
-The app includes an assistant API route at `/api/assistant`, but the current implementation is a starter/placeholder response. To make it truly AI-powered, connect it to an actual model provider such as OpenAI, Anthropic, or another supported provider and add the API key in your environment.
+The signed-in dashboard includes an event assistant backed directly by Groq using Groq's recommended replacement model `openai/gpt-oss-20b` for the retired `llama-3.1-8b-instant` route. It supplies up to 50 events visible under the signed-in user's Supabase row-level security policies. The API accepts a maximum of 20 recent messages and 12,000 characters per request. Add `GROQ_API_KEY` to your local server environment and to Vercel's project environment variables, then restart or redeploy the app. Never expose the key in browser code or prefix it with `NEXT_PUBLIC_`.
 
 ## 9) Troubleshooting
 ### App won’t start
