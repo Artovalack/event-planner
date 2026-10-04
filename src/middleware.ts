@@ -1,0 +1,62 @@
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { NextResponse, type NextRequest } from 'next/server';
+
+type SupabaseCookie = {
+    name: string;
+    value: string;
+    options: CookieOptions;
+};
+
+export async function middleware(request: NextRequest) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+        return NextResponse.json(
+            { error: 'Supabase is not configured. Check the public Supabase URL and anon key.' },
+            { status: 500 },
+        );
+    }
+
+    let response = NextResponse.next({ request });
+    const refreshedCookies: SupabaseCookie[] = [];
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+        cookies: {
+            getAll() {
+                return request.cookies.getAll();
+            },
+            setAll(cookiesToSet) {
+                refreshedCookies.push(...cookiesToSet);
+                cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+                response = NextResponse.next({ request });
+                cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
+            },
+        },
+    });
+
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error && error.name !== 'AuthSessionMissingError') {
+        return NextResponse.json(
+            { error: `Unable to verify your session: ${error.message}` },
+            { status: 503 },
+        );
+    }
+
+    if (!data.user) {
+        if (request.nextUrl.pathname.startsWith('/api/')) {
+            return NextResponse.json({ error: 'Authentication required.' }, { status: 401 });
+        }
+
+        const loginUrl = new URL('/login', request.url);
+        const redirectResponse = NextResponse.redirect(loginUrl);
+        refreshedCookies.forEach(({ name, value, options }) => redirectResponse.cookies.set(name, value, options));
+        return redirectResponse;
+    }
+
+    return response;
+}
+
+export const config = {
+    matcher: ['/events/:path*', '/dashboard/:path*', '/api/:path*'],
+};

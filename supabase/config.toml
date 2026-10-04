@@ -1,0 +1,9 @@
+[project-root]/supabase/config.toml
+
+db_url = "your_supabase_database_url"
+db_key = "your_supabase_anon_or_service_role_key"
+schema = "public"
+migrations_dir = "migrations"
+seeds_dir = "seeds"
+extensions = ["uuid-ossp", "pgcrypto"]
+log_level = "info"
