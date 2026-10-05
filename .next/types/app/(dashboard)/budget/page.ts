@@ -1,4 +1,4 @@
-// File: /home/artovalack/repos/planner/src/app/(dashboard)/budget/page.tsx
+// File: /home/artovalack/repos/event-planner/src/app/(dashboard)/budget/page.tsx
 import * as entry from '../../../../../src/app/(dashboard)/budget/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

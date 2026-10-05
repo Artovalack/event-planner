@@ -3,7 +3,7 @@ import { streamText, type CoreMessage } from 'ai';
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
-import { ACTIVE_EVENT_COOKIE } from '@/lib/planner';
+import { getActiveEventCookieName } from '@/lib/planner';
 
 type ChatMessage = {
     role: 'user' | 'assistant';
@@ -83,6 +83,7 @@ export async function POST(request: Request) {
         const { data: events, error: eventsError } = await supabase
             .from('events')
             .select('id, title, date, location, description')
+            .eq('user_id', user.id)
             .order('date', { ascending: true, nullsFirst: false })
             .limit(50);
 
@@ -97,13 +98,17 @@ export async function POST(request: Request) {
             location: event.location?.slice(0, 120) ?? null,
             description: event.description?.slice(0, 600) ?? null,
         }));
-        const requestedEventId = cookies().get(ACTIVE_EVENT_COOKIE)?.value;
+        const requestedEventId = cookies().get(getActiveEventCookieName(user.id))?.value;
         let activeEvent = (events ?? []).find((event) => event.id === requestedEventId)
             ?? (events ?? []).find((event) => event.date && new Date(event.date).getTime() >= Date.now())
             ?? events?.[0];
         if (requestedEventId && !((events ?? []).some((event) => event.id === requestedEventId))) {
             const { data: selectedEvent, error: selectedEventError } = await supabase
-                .from('events').select('id, title, date, location, description').eq('id', requestedEventId).maybeSingle();
+                .from('events')
+                .select('id, title, date, location, description')
+                .eq('id', requestedEventId)
+                .eq('user_id', user.id)
+                .maybeSingle();
             if (selectedEventError) {
                 console.error('Unable to load the selected event for the assistant:', selectedEventError.message);
                 return NextResponse.json({ error: 'Unable to load the selected event for the assistant.' }, { status: 500 });

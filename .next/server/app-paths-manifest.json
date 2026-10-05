@@ -1,8 +1,17 @@
 {
-  "/page": "app/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(auth)/mfa/page": "app/(auth)/mfa/page.js",
   "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(auth)/verify-otp/page": "app/(auth)/verify-otp/page.js",
+  "/(auth)/signup/page": "app/(auth)/signup/page.js",
+  "/api/assistant/route": "app/api/assistant/route.js",
+  "/auth/callback/route": "app/auth/callback/route.js",
+  "/page": "app/page.js",
+  "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
   "/(dashboard)/budget/page": "app/(dashboard)/budget/page.js",
-  "/(dashboard)/events/page": "app/(dashboard)/events/page.js",
+  "/(dashboard)/vendors/page": "app/(dashboard)/vendors/page.js",
+  "/(dashboard)/events/[eventId]/page": "app/(dashboard)/events/[eventId]/page.js",
+  "/(dashboard)/guests/page": "app/(dashboard)/guests/page.js",
   "/(dashboard)/tasks/page": "app/(dashboard)/tasks/page.js",
-  "/(dashboard)/guests/page": "app/(dashboard)/guests/page.js"
+  "/(dashboard)/events/page": "app/(dashboard)/events/page.js"
 }

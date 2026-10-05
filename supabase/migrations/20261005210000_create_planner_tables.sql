@@ -1,5 +1,32 @@
 create extension if not exists "pgcrypto";
 
+alter table public.events add column if not exists user_id uuid references auth.users(id) on delete cascade;
+
+create index if not exists events_user_id_idx on public.events(user_id);
+
+alter table public.events enable row level security;
+
+drop policy if exists "Authenticated users can view events" on public.events;
+create policy "Authenticated users can view events"
+  on public.events for select to authenticated
+  using (user_id = auth.uid());
+
+drop policy if exists "Authenticated users can create events" on public.events;
+create policy "Authenticated users can create events"
+  on public.events for insert to authenticated
+  with check (user_id = auth.uid());
+
+drop policy if exists "Authenticated users can update events" on public.events;
+create policy "Authenticated users can update events"
+  on public.events for update to authenticated
+  using (user_id = auth.uid())
+  with check (user_id = auth.uid());
+
+drop policy if exists "Authenticated users can delete events" on public.events;
+create policy "Authenticated users can delete events"
+  on public.events for delete to authenticated
+  using (user_id = auth.uid());
+
 create table if not exists public.tasks (
   id uuid primary key default gen_random_uuid(),
   event_id uuid not null references public.events(id) on delete cascade,
@@ -71,23 +98,87 @@ alter table public.vendors enable row level security;
 
 drop policy if exists "Authenticated users can manage tasks" on public.tasks;
 create policy "Authenticated users can manage tasks" on public.tasks
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using (
+    exists (
+      select 1 from public.events e
+      where e.id = public.tasks.event_id and e.user_id = auth.uid()
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.events e
+      where e.id = public.tasks.event_id and e.user_id = auth.uid()
+    )
+  );
 
 drop policy if exists "Authenticated users can manage subtasks" on public.subtasks;
 create policy "Authenticated users can manage subtasks" on public.subtasks
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using (
+    exists (
+      select 1
+      from public.tasks t
+      join public.events e on e.id = t.event_id
+      where t.id = public.subtasks.task_id and e.user_id = auth.uid()
+    )
+  )
+  with check (
+    exists (
+      select 1
+      from public.tasks t
+      join public.events e on e.id = t.event_id
+      where t.id = public.subtasks.task_id and e.user_id = auth.uid()
+    )
+  );
 
 drop policy if exists "Authenticated users can manage guests" on public.guests;
 create policy "Authenticated users can manage guests" on public.guests
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using (
+    exists (
+      select 1 from public.events e
+      where e.id = public.guests.event_id and e.user_id = auth.uid()
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.events e
+      where e.id = public.guests.event_id and e.user_id = auth.uid()
+    )
+  );
 
 drop policy if exists "Authenticated users can manage budget items" on public.budget_items;
 create policy "Authenticated users can manage budget items" on public.budget_items
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using (
+    exists (
+      select 1 from public.events e
+      where e.id = public.budget_items.event_id and e.user_id = auth.uid()
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.events e
+      where e.id = public.budget_items.event_id and e.user_id = auth.uid()
+    )
+  );
 
 drop policy if exists "Authenticated users can manage vendors" on public.vendors;
 create policy "Authenticated users can manage vendors" on public.vendors
-  for all to authenticated using (true) with check (true);
+  for all to authenticated
+  using (
+    exists (
+      select 1 from public.events e
+      where e.id = public.vendors.event_id and e.user_id = auth.uid()
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.events e
+      where e.id = public.vendors.event_id and e.user_id = auth.uid()
+    )
+  );
 
 create or replace function public.save_task_with_subtasks(
   p_event_id uuid,
@@ -105,6 +196,12 @@ as $$
 declare
   saved_task_id uuid;
 begin
+  if not exists (
+    select 1 from public.events e where e.id = p_event_id and e.user_id = auth.uid()
+  ) then
+    raise exception 'The selected event is not available for this user.';
+  end if;
+
   if p_task_id is null then
     insert into public.tasks (event_id, title, category, due_date, notes)
     values (p_event_id, trim(p_title), coalesce(nullif(trim(p_category), ''), 'General'), p_due_date, p_notes)

@@ -1,4 +1,4 @@
-// File: /home/artovalack/repos/planner/src/app/(auth)/login/page.tsx
+// File: /home/artovalack/repos/event-planner/src/app/(auth)/login/page.tsx
 import * as entry from '../../../../../src/app/(auth)/login/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

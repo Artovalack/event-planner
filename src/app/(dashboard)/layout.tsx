@@ -3,13 +3,14 @@ import Sidebar from '../../components/layout/Sidebar';
 import EventChatbot from '../../components/ai/EventChatbot';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
-import { getPlannerEvents, ACTIVE_EVENT_COOKIE } from '@/lib/planner';
+import { getPlannerEvents, getCurrentUserId, getActiveEventCookieName } from '@/lib/planner';
 
 const inter = Inter({ subsets: ['latin'] });
 
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
+    const userId = await getCurrentUserId();
     const events = await getPlannerEvents();
-    const requestedEventId = cookies().get(ACTIVE_EVENT_COOKIE)?.value;
+    const requestedEventId = cookies().get(getActiveEventCookieName(userId))?.value;
     const activeEvent = events.find((event) => event.id === requestedEventId)
         ?? events.find((event) => event.date && new Date(event.date).getTime() >= Date.now())
         ?? events[0]

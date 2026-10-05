@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
-import { ACTIVE_EVENT_COOKIE } from '@/lib/planner';
+import { ACTIVE_EVENT_COOKIE, getActiveEventCookieName } from '@/lib/planner';
 import type { BudgetItemRow, GuestRow, VendorRow } from '@/types/database';
 
 type TaskInput = {
@@ -18,19 +18,31 @@ type GuestInput = Omit<GuestRow, 'id' | 'event_id' | 'total_companions' | 'creat
 type BudgetInput = Omit<BudgetItemRow, 'id' | 'event_id' | 'created_at'>;
 type VendorInput = Omit<VendorRow, 'id' | 'event_id' | 'created_at'>;
 
+async function getCurrentUserId() {
+    const supabase = getSupabaseServerClient();
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) throw new Error('Authentication required.');
+    return user.id;
+}
+
 async function assertEventAvailable(eventId: string) {
     const supabase = getSupabaseServerClient();
-    const { data, error } = await supabase.from('events').select('id').eq('id', eventId).single();
+    const userId = await getCurrentUserId();
+    const { data, error } = await supabase.from('events').select('id').eq('id', eventId).eq('user_id', userId).single();
     if (error || !data) throw new Error('The selected event is not available.');
     return supabase;
 }
 
 async function requireEvent(eventId: string) {
     const supabase = getSupabaseServerClient();
+    const userId = await getCurrentUserId();
     const { data: events, error } = await supabase
-        .from('events').select('id, date').order('date', { ascending: true, nullsFirst: false });
+        .from('events')
+        .select('id, date')
+        .eq('user_id', userId)
+        .order('date', { ascending: true, nullsFirst: false });
     if (error) throw new Error(`Unable to validate the active event: ${error.message}`);
-    const requestedId = cookies().get(ACTIVE_EVENT_COOKIE)?.value;
+    const requestedId = cookies().get(getActiveEventCookieName(userId))?.value;
     const activeEvent = events?.find((event) => event.id === requestedId)
         ?? events?.find((event) => event.date && new Date(event.date).getTime() >= Date.now())
         ?? events?.[0];
@@ -47,14 +59,18 @@ function refreshPlanner() {
 }
 
 export async function setActiveEvent(eventId: string) {
+    const userId = await getCurrentUserId();
     await assertEventAvailable(eventId);
-    cookies().set(ACTIVE_EVENT_COOKIE, eventId, {
+    cookies().set(getActiveEventCookieName(userId), eventId, {
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
         path: '/',
         maxAge: 60 * 60 * 24 * 365,
     });
+    if (cookies().has(ACTIVE_EVENT_COOKIE)) {
+        cookies().delete(ACTIVE_EVENT_COOKIE);
+    }
     refreshPlanner();
 }
 

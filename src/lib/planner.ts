@@ -4,11 +4,24 @@ import type { EventRow } from '@/types/database';
 
 export const ACTIVE_EVENT_COOKIE = 'planner_active_event';
 
+export function getActiveEventCookieName(userId?: string) {
+    return userId ? `planner_active_event_${userId}` : ACTIVE_EVENT_COOKIE;
+}
+
+export async function getCurrentUserId() {
+    const supabase = getSupabaseServerClient();
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (error || !user) throw new Error('Authentication required.');
+    return user.id;
+}
+
 export async function getPlannerEvents(): Promise<EventRow[]> {
     const supabase = getSupabaseServerClient();
+    const userId = await getCurrentUserId();
     const { data, error } = await supabase
         .from('events')
         .select('*')
+        .eq('user_id', userId)
         .order('date', { ascending: true, nullsFirst: false });
 
     if (error) throw new Error(`Unable to load events: ${error.message}`);
@@ -16,8 +29,9 @@ export async function getPlannerEvents(): Promise<EventRow[]> {
 }
 
 export async function getActiveEvent(): Promise<EventRow | null> {
+    const userId = await getCurrentUserId();
     const events = await getPlannerEvents();
-    const requestedId = cookies().get(ACTIVE_EVENT_COOKIE)?.value;
+    const requestedId = cookies().get(getActiveEventCookieName(userId))?.value;
     const selected = events.find((event) => event.id === requestedId);
     if (selected) return selected;
 

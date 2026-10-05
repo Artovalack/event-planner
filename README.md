@@ -122,6 +122,7 @@ create extension if not exists "pgcrypto";
 
 create table if not exists public.events (
   id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
   title text not null,
   description text,
   date timestamptz,
@@ -134,33 +135,33 @@ alter table public.events enable row level security;
 drop policy if exists "Authenticated users can view events" on public.events;
 create policy "Authenticated users can view events"
   on public.events for select to authenticated
-  using (true);
+  using (user_id = auth.uid());
 
 drop policy if exists "Authenticated users can create events" on public.events;
 create policy "Authenticated users can create events"
   on public.events for insert to authenticated
-  with check (true);
+  with check (user_id = auth.uid());
 
 drop policy if exists "Authenticated users can update events" on public.events;
 create policy "Authenticated users can update events"
   on public.events for update to authenticated
-  using (true)
-  with check (true);
+  using (user_id = auth.uid())
+  with check (user_id = auth.uid());
 
 drop policy if exists "Authenticated users can delete events" on public.events;
 create policy "Authenticated users can delete events"
   on public.events for delete to authenticated
-  using (true);
+  using (user_id = auth.uid());
 ```
 
-This starter uses a shared event planner: any signed-in user can view and manage all events. Row-level security blocks anonymous access. For a private planner, add an `owner_id` column and change the policies to limit each operation to rows owned by `auth.uid()`.
+This planner is private per user: each event belongs to the authenticated owner and only that user can view, edit, and delete it. Row-level security blocks anonymous access and prevents one user from reading another user's events. If an existing database already contains shared rows, add the `user_id` column and backfill it with the correct owner before re-running the policies.
 
 If you already created the table and see `new row violates row-level security policy`, run the `alter table` and four `drop policy` / `create policy` sections above in Supabase **SQL Editor**. Then make sure you are signed in to the app and retry. The policies only allow signed-in users; do not fix this by enabling anonymous access or disabling row-level security.
 
 ### Add task, guest, budget, and vendor tables
 After `public.events` exists, paste the full contents of [`supabase/migrations/20261005210000_create_planner_tables.sql`](./supabase/migrations/20261005210000_create_planner_tables.sql) into Supabase **SQL Editor** and run it. It creates the task/subtask, guest, budget item, and vendor tables, their event foreign keys and indexes, and authenticated-user row-level policies. The guest companion total is generated from its adult, child, and baby counts.
 
-The app keeps a selected event for the signed-in session and scopes each feature query and mutation to that event. This starter intentionally follows the shared authenticated workspace policy used by `events`; for per-user privacy, restrict the event policies and each related-table policy using an event ownership relation.
+The app keeps a selected event for the signed-in session and scopes each feature query and mutation to that event. This starter is configured for per-user privacy: each event stores the authenticated owner and all related planner data is only accessible through events that belong to that user.
 
 The `/tasks`, `/guests`, `/budget`, `/vendors`, and `/dashboard` routes use server-side initial data fetching and authenticated server actions. Dashboard and list print buttons open the browser's print dialog, where a user can choose **Save as PDF** for event summaries, guest lists, or task summaries.
 

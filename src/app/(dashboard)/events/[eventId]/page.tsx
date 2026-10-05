@@ -18,10 +18,16 @@ const EventPage = () => {
             if (!eventId) return;
 
             try {
+                const { data: { user }, error: userError } = await getSupabaseClient().auth.getUser();
+                if (userError || !user) {
+                    throw new Error('Authentication required.');
+                }
+
                 const { data, error } = await getSupabaseClient()
                     .from('events')
                     .select('*')
                     .eq('id', eventId)
+                    .eq('user_id', user.id)
                     .single();
 
                 if (error) throw error;
