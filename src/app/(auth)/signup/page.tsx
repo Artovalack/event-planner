@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getSupabaseClient } from '../../../lib/supabase/client';
+import OAuthButtons from '@/components/auth/OAuthButtons';
 
 const SignupPage = () => {
     const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const SignupPage = () => {
         setIsSubmitting(true);
 
         try {
-            const { error } = await getSupabaseClient().auth.signUp({
+            const { data, error } = await getSupabaseClient().auth.signUp({
                 email,
                 password,
             });
@@ -28,7 +29,12 @@ const SignupPage = () => {
                 return;
             }
 
-            router.push('/login');
+            if (data.session) {
+                router.replace('/events');
+                router.refresh();
+            } else {
+                router.push(`/verify-otp?email=${encodeURIComponent(email.trim())}`);
+            }
         } catch (signupError) {
             const message = signupError instanceof Error ? signupError.message : 'Unable to create your account.';
             setError(
@@ -71,6 +77,7 @@ const SignupPage = () => {
                         {isSubmitting ? 'Creating account…' : 'Sign Up'}
                     </button>
                 </form>
+                <OAuthButtons />
                 <p className="auth-footer">
                     Already have an account? <Link href="/login">Log in</Link>
                 </p>

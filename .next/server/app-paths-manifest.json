@@ -1,4 +1,8 @@
 {
-  "/api/assistant/route": "app/api/assistant/route.js",
-  "/(dashboard)/events/page": "app/(dashboard)/events/page.js"
+  "/page": "app/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(dashboard)/budget/page": "app/(dashboard)/budget/page.js",
+  "/(dashboard)/events/page": "app/(dashboard)/events/page.js",
+  "/(dashboard)/tasks/page": "app/(dashboard)/tasks/page.js",
+  "/(dashboard)/guests/page": "app/(dashboard)/guests/page.js"
 }

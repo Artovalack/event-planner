@@ -59,7 +59,7 @@ export default function EventChatbot() {
                     <div className="assistant-messages" aria-live="polite">
                         {messages.length === 0 && (
                             <p className="assistant-empty">
-                                Ask about your upcoming schedule or get help planning an event.
+                                Ask about events, tasks, guests, your budget, or vendors.
                             </p>
                         )}
                         {messages.map((message) => (
@@ -97,7 +97,7 @@ export default function EventChatbot() {
                         <input
                             value={input}
                             onChange={handleInputChange}
-                            placeholder="Ask about your events…"
+                            placeholder="Ask about your plan…"
                             aria-label="Message the event assistant"
                             maxLength={4000}
                             disabled={isLoading}

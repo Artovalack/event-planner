@@ -87,10 +87,32 @@ In Supabase:
 1. Go to Authentication > Settings
 2. Enable Email sign-in if you want login/signup using email/password
 3. Configure your Site URL and Redirect URLs for local development
+4. Set the **Confirm signup** email template to use the OTP token shown below instead of `{{ .ConfirmationURL }}`. For the passwordless login-code option, set the **Magic Link** template to use the same token template.
+5. Under Authentication > URL Configuration, allow the callback URLs `http://localhost:3000/auth/callback` and `https://your-production-domain/auth/callback`.
 
 For local development, use:
 - Site URL: `http://localhost:3000`
 - Redirect URL: `http://localhost:3000/**`
+
+#### Six-digit email verification template
+In Authentication > Email Templates > **Confirm signup**, use a custom HTML template that prints Supabase's `{{ .Token }}` value (not the confirmation URL). For example:
+
+```html
+<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;padding:32px;color:#1d2a3b">
+  <h1 style="font-size:24px">Verify your email</h1>
+  <p>Enter this six-digit code in Event Planner to finish creating your account:</p>
+  <p style="font-size:32px;font-weight:700;letter-spacing:8px;padding:16px 20px;background:#f3f6fa;border-radius:8px;text-align:center">{{ .Token }}</p>
+  <p>If you did not request this code, you can ignore this email.</p>
+</div>
+```
+
+The signup form opens `/verify-otp` and verifies this code with Supabase Auth. The login page also offers a passwordless email-code option; set the **Magic Link** email template's HTML to the same pattern so it delivers the code rather than requiring the user to click a magic link. Configure code expiry and email rate limits under Supabase Auth settings.
+
+#### Google and Facebook OAuth
+In Supabase Authentication > Providers, enable Google and Facebook and enter each provider's client ID and secret. In each provider's developer console, set its OAuth callback/redirect URI to the Supabase callback shown in that provider's Supabase settings (normally `https://<project-ref>.supabase.co/auth/v1/callback`). Add the app callback URL (`http://localhost:3000/auth/callback` and your production `/auth/callback` URL) to Supabase Authentication > URL Configuration > Redirect URLs. OAuth buttons use Supabase's hosted provider flow; the app callback exchanges the returned PKCE authorization code for a session.
+
+#### Authenticator-app MFA
+Signed-in users can open **Authenticator security** in the workspace sidebar or visit `/mfa`, scan the displayed QR code with a TOTP app, and verify a six-digit code to enable MFA. Once a verified TOTP factor exists, protected planner pages and APIs require an authenticator challenge after sign-in. MFA uses Supabase Auth factors and does not require an application database migration.
 
 ### Create the database table
 Open SQL Editor in Supabase and run:
@@ -134,6 +156,13 @@ create policy "Authenticated users can delete events"
 This starter uses a shared event planner: any signed-in user can view and manage all events. Row-level security blocks anonymous access. For a private planner, add an `owner_id` column and change the policies to limit each operation to rows owned by `auth.uid()`.
 
 If you already created the table and see `new row violates row-level security policy`, run the `alter table` and four `drop policy` / `create policy` sections above in Supabase **SQL Editor**. Then make sure you are signed in to the app and retry. The policies only allow signed-in users; do not fix this by enabling anonymous access or disabling row-level security.
+
+### Add task, guest, budget, and vendor tables
+After `public.events` exists, paste the full contents of [`supabase/migrations/20261005210000_create_planner_tables.sql`](./supabase/migrations/20261005210000_create_planner_tables.sql) into Supabase **SQL Editor** and run it. It creates the task/subtask, guest, budget item, and vendor tables, their event foreign keys and indexes, and authenticated-user row-level policies. The guest companion total is generated from its adult, child, and baby counts.
+
+The app keeps a selected event for the signed-in session and scopes each feature query and mutation to that event. This starter intentionally follows the shared authenticated workspace policy used by `events`; for per-user privacy, restrict the event policies and each related-table policy using an event ownership relation.
+
+The `/tasks`, `/guests`, `/budget`, `/vendors`, and `/dashboard` routes use server-side initial data fetching and authenticated server actions. Dashboard and list print buttons open the browser's print dialog, where a user can choose **Save as PDF** for event summaries, guest lists, or task summaries.
 
 ### Get your Supabase keys
 In Supabase:
@@ -215,7 +244,7 @@ Before going live, confirm:
 - `npm run build` succeeds in CI or on the deploy platform
 
 ## 8) Notes about the AI assistant
-The signed-in dashboard includes an event assistant backed directly by Groq using Groq's recommended replacement model `openai/gpt-oss-20b` for the retired `llama-3.1-8b-instant` route. It supplies up to 50 events visible under the signed-in user's Supabase row-level security policies. The API accepts a maximum of 20 recent messages and 12,000 characters per request. Add `GROQ_API_KEY` to your local server environment and to Vercel's project environment variables, then restart or redeploy the app. Never expose the key in browser code or prefix it with `NEXT_PUBLIC_`.
+The signed-in dashboard includes an event assistant backed directly by Groq using Groq's recommended replacement model `openai/gpt-oss-20b` for the retired `llama-3.1-8b-instant` route. It supplies up to 50 visible events and event-scoped task/subtask, guest/invitation, budget/payment, and vendor details for the selected event, all subject to the signed-in user's Supabase row-level security policies. The API accepts a maximum of 20 recent messages and 12,000 characters per request. Add `GROQ_API_KEY` to your local server environment and to Vercel's project environment variables, then restart or redeploy the app. Never expose the key in browser code or prefix it with `NEXT_PUBLIC_`.
 
 ## 9) Troubleshooting
 ### App won’t start

@@ -54,9 +54,29 @@ export async function middleware(request: NextRequest) {
         return redirectResponse;
     }
 
+    const { data: assurance, error: assuranceError } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+    if (assuranceError) {
+        return NextResponse.json(
+            { error: `Unable to verify multi-factor authentication: ${assuranceError.message}` },
+            { status: 503 },
+        );
+    }
+
+    if (assurance.currentLevel === 'aal1' && assurance.nextLevel === 'aal2' && !request.nextUrl.pathname.startsWith('/mfa')) {
+        if (request.nextUrl.pathname.startsWith('/api/')) {
+            return NextResponse.json({ error: 'Complete authenticator verification to continue.' }, { status: 403 });
+        }
+        const challengeUrl = new URL('/mfa', request.url);
+        challengeUrl.searchParams.set('mode', 'challenge');
+        challengeUrl.searchParams.set('next', `${request.nextUrl.pathname}${request.nextUrl.search}`);
+        const challengeResponse = NextResponse.redirect(challengeUrl);
+        refreshedCookies.forEach(({ name, value, options }) => challengeResponse.cookies.set(name, value, options));
+        return challengeResponse;
+    }
+
     return response;
 }
 
 export const config = {
-    matcher: ['/events/:path*', '/dashboard/:path*', '/api/:path*'],
+    matcher: ['/events/:path*', '/dashboard/:path*', '/tasks/:path*', '/guests/:path*', '/budget/:path*', '/vendors/:path*', '/mfa/:path*', '/api/:path*'],
 };
