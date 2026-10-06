@@ -165,14 +165,18 @@
     cursor: pointer;
 }
 
-.oauth-button:hover,
-.auth-secondary-action:hover {
+.oauth-button:not(:disabled):hover,
+.auth-secondary-action:not(:disabled):hover {
     background: #f6f8fb;
 }
 
-.oauth-button:disabled,
-.auth-secondary-action:disabled {
+.oauth-button:disabled {
     cursor: wait;
+    opacity: 0.65;
+}
+
+.auth-secondary-action:disabled {
+    cursor: not-allowed;
     opacity: 0.65;
 }
 

@@ -89,6 +89,7 @@ In Supabase:
 3. Configure your Site URL and Redirect URLs for local development
 4. Set the **Confirm signup** email template to use the OTP token shown below instead of `{{ .ConfirmationURL }}`. For the passwordless login-code option, set the **Magic Link** template to use the same token template.
 5. Under Authentication > URL Configuration, allow the callback URLs `http://localhost:3000/auth/callback` and `https://your-production-domain/auth/callback`.
+6. Set the Email OTP length to **6** in the Email provider settings. The app requires exactly six-digit email codes.
 
 For local development, use:
 - Site URL: `http://localhost:3000`
@@ -106,7 +107,9 @@ In Authentication > Email Templates > **Confirm signup**, use a custom HTML temp
 </div>
 ```
 
-The signup form opens `/verify-otp` and verifies this code with Supabase Auth. The login page also offers a passwordless email-code option; set the **Magic Link** email template's HTML to the same pattern so it delivers the code rather than requiring the user to click a magic link. Configure code expiry and email rate limits under Supabase Auth settings.
+The signup form opens `/verify-otp` and verifies this code with Supabase Auth. The login page also offers a passwordless email-code option; set the **Magic Link** email template's HTML to the same pattern so it delivers the six-digit code rather than requiring the user to click a magic link. Configure code expiry and email rate limits under Supabase Auth settings.
+
+If Supabase reports that it could not send the email, verify the **Magic Link** template and check the project's email/SMTP settings and Auth logs for the provider's delivery error. Supabase's built-in email service may have sending restrictions; configure a custom SMTP provider for reliable delivery.
 
 #### Google and Facebook OAuth
 In Supabase Authentication > Providers, enable Google and Facebook and enter each provider's client ID and secret. In each provider's developer console, set its OAuth callback/redirect URI to the Supabase callback shown in that provider's Supabase settings (normally `https://<project-ref>.supabase.co/auth/v1/callback`). Add the app callback URL (`http://localhost:3000/auth/callback` and your production `/auth/callback` URL) to Supabase Authentication > URL Configuration > Redirect URLs. OAuth buttons use Supabase's hosted provider flow; the app callback exchanges the returned PKCE authorization code for a session.

@@ -2,11 +2,10 @@
 
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { getSupabaseClient } from '@/lib/supabase/client';
+import { getAuthErrorMessage } from '@/lib/supabase/auth';
 
 export default function VerifyOtpPage({ searchParams }: { searchParams: { email?: string; type?: string } }) {
-    const router = useRouter();
     const initialEmail = searchParams.email ?? '';
     const type: 'email' | 'signup' = searchParams.type === 'email' ? 'email' : 'signup';
     const [email, setEmail] = useState(initialEmail);
@@ -27,13 +26,12 @@ export default function VerifyOtpPage({ searchParams }: { searchParams: { email?
                 type,
             });
             if (verifyError) {
-                setError(verifyError.message);
+                setError(getAuthErrorMessage(verifyError, 'Unable to verify this code.'));
                 return;
             }
-            router.replace('/events');
-            router.refresh();
+            window.location.replace('/events');
         } catch (caughtError) {
-            setError(caughtError instanceof Error ? caughtError.message : 'Unable to verify this code.');
+            setError(getAuthErrorMessage(caughtError, 'Unable to verify this code.'));
         } finally {
             setBusy(false);
         }
@@ -48,10 +46,10 @@ export default function VerifyOtpPage({ searchParams }: { searchParams: { email?
             const { error: resendError } = type === 'email'
                 ? await supabase.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: false } })
                 : await supabase.auth.resend({ type: 'signup', email: email.trim() });
-            if (resendError) setError(resendError.message);
+            if (resendError) setError(getAuthErrorMessage(resendError, 'Unable to resend the verification code.'));
             else setNotice('A new verification code has been sent.');
         } catch (caughtError) {
-            setError(caughtError instanceof Error ? caughtError.message : 'Unable to resend the verification code.');
+            setError(getAuthErrorMessage(caughtError, 'Unable to resend the verification code.'));
         } finally {
             setBusy(false);
         }

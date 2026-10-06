@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getSupabaseClient } from '../../../lib/supabase/client';
+import { getAuthErrorMessage } from '@/lib/supabase/auth';
 import OAuthButtons from '@/components/auth/OAuthButtons';
 
 const SignupPage = () => {
@@ -25,7 +26,7 @@ const SignupPage = () => {
             });
 
             if (error) {
-                setError(error.message);
+                setError(getAuthErrorMessage(error, 'Unable to create your account.'));
                 return;
             }
 
@@ -36,12 +37,7 @@ const SignupPage = () => {
                 router.push(`/verify-otp?email=${encodeURIComponent(email.trim())}`);
             }
         } catch (signupError) {
-            const message = signupError instanceof Error ? signupError.message : 'Unable to create your account.';
-            setError(
-                /failed to fetch|fetch failed|networkerror/i.test(message)
-                    ? 'Unable to reach Supabase. Check your project URL and network connection.'
-                    : message,
-            );
+            setError(getAuthErrorMessage(signupError, 'Unable to create your account.'));
         } finally {
             setIsSubmitting(false);
         }

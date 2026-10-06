@@ -1,9 +1,10 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { getSupabaseClient } from '../../../lib/supabase/client';
+import { getAuthErrorMessage } from '@/lib/supabase/auth';
 import OAuthButtons from '@/components/auth/OAuthButtons';
 
 const LoginPage = () => {
@@ -32,18 +33,13 @@ const LoginPage = () => {
             });
 
             if (error) {
-                setError(error.message);
+                setError(getAuthErrorMessage(error, 'Unable to log in.'));
                 return;
             }
 
-            router.push('/events');
+            window.location.assign('/events');
         } catch (loginError) {
-            const message = loginError instanceof Error ? loginError.message : 'Unable to log in.';
-            setError(
-                /failed to fetch|fetch failed|networkerror/i.test(message)
-                    ? 'Unable to reach Supabase. Check your project URL and network connection.'
-                    : message,
-            );
+            setError(getAuthErrorMessage(loginError, 'Unable to log in.'));
         } finally {
             setIsSubmitting(false);
         }
@@ -89,10 +85,10 @@ const LoginPage = () => {
                             email: email.trim(),
                             options: { shouldCreateUser: false },
                         });
-                        if (otpError) setError(otpError.message);
+                        if (otpError) setError(getAuthErrorMessage(otpError, 'Unable to send a sign-in code.'));
                         else router.push(`/verify-otp?email=${encodeURIComponent(email.trim())}&type=email`);
                     } catch (caughtError) {
-                        setError(caughtError instanceof Error ? caughtError.message : 'Unable to send a sign-in code.');
+                        setError(getAuthErrorMessage(caughtError, 'Unable to send a sign-in code.'));
                     } finally {
                         setIsSubmitting(false);
                     }
