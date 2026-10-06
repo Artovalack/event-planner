@@ -47,7 +47,7 @@ export default function VerifyOtpPage({ searchParams }: { searchParams: { email?
                 ? await supabase.auth.signInWithOtp({ email: email.trim(), options: { shouldCreateUser: false } })
                 : await supabase.auth.resend({ type: 'signup', email: email.trim() });
             if (resendError) setError(getAuthErrorMessage(resendError, 'Unable to resend the verification code.'));
-            else setNotice('A new verification code has been sent.');
+            else setNotice('Supabase accepted the request. Check your spam or promotions folder; if the email still does not arrive, the project administrator should check the Supabase Auth logs and SMTP settings.');
         } catch (caughtError) {
             setError(getAuthErrorMessage(caughtError, 'Unable to resend the verification code.'));
         } finally {

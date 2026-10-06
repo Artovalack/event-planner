@@ -11,15 +11,20 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/(auth)/login/page": [
+    "/(auth)/signup/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/login/page.js"
+      "static/chunks/app/(auth)/signup/page.js"
     ],
     "/(auth)/verify-otp/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(auth)/verify-otp/page.js"
+    ],
+    "/(auth)/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(auth)/login/page.js"
     ],
     "/(dashboard)/events/page": [
       "static/chunks/webpack.js",
@@ -32,15 +37,10 @@
       "static/css/app/(dashboard)/layout.css",
       "static/chunks/app/(dashboard)/layout.js"
     ],
-    "/(dashboard)/tasks/page": [
+    "/(auth)/mfa/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/tasks/page.js"
-    ],
-    "/(dashboard)/budget/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/budget/page.js"
+      "static/chunks/app/(auth)/mfa/page.js"
     ]
   }
 }
