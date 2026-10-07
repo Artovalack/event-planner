@@ -1,7 +1,9 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 import { getSupabaseClient } from '@/lib/supabase/client';
 
 type TotpFactor = {
@@ -58,9 +60,35 @@ export default function MfaManager({ initialChallenge = false }: { initialChalle
         setError(null);
         setNotice(null);
         try {
-            const { data, error: enrollError } = await getSupabaseClient().auth.mfa.enroll({
+            const supabase = getSupabaseClient();
+            const { data: factorData, error: factorError } = await supabase.auth.mfa.listFactors();
+            if (factorError) throw factorError;
+
+            const unfinishedFactors = factorData.all.filter(
+                (factor) => factor.factor_type === 'totp' && factor.status === 'unverified',
+            );
+            const cleanupResults = await Promise.all(
+                unfinishedFactors.map(({ id }) => supabase.auth.mfa.unenroll({ factorId: id })),
+            );
+            const cleanupError = cleanupResults.find((result) => result.error)?.error;
+            if (cleanupError) throw cleanupError;
+
+            const existingNames = new Set(
+                factorData.all
+                    .filter((factor) => !unfinishedFactors.some(({ id }) => id === factor.id))
+                    .map((factor) => factor.friendly_name)
+                    .filter((name): name is string => Boolean(name)),
+            );
+            let friendlyName = 'Authenticator app';
+            let suffix = 2;
+            while (existingNames.has(friendlyName)) {
+                friendlyName = `Authenticator app ${suffix}`;
+                suffix += 1;
+            }
+
+            const { data, error: enrollError } = await supabase.auth.mfa.enroll({
                 factorType: 'totp',
-                friendlyName: 'Authenticator app',
+                friendlyName,
             });
             if (enrollError) throw enrollError;
             setEnrollment({
@@ -124,8 +152,14 @@ export default function MfaManager({ initialChallenge = false }: { initialChalle
     };
 
     return (
-        <main className="auth-page">
+        <main className="auth-page mfa-auth-page">
             <section className="auth-card mfa-card">
+                {!challengeMode && (
+                    <Link className="mfa-back-link" href="/settings/account">
+                        <ArrowLeft size={16} aria-hidden="true" />
+                        Back to profile &amp; preferences
+                    </Link>
+                )}
                 <h1>{challengeMode ? 'Two-step verification' : 'Authenticator security'}</h1>
                 <p className="auth-description">
                     {challengeMode

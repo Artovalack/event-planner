@@ -59,10 +59,12 @@ export default function VerifyOtpPage({ searchParams }: { searchParams: { email?
     };
 
     return (
-        <main className="auth-page">
+        <main className="auth-page verify-auth-page">
             <section className="auth-card">
-                <h1>Verify your email</h1>
-                <p className="auth-description">Enter the 6-digit code sent to your email address.</p>
+                <header className="verify-card-heading">
+                    <h1>Verify your email</h1>
+                    <p className="auth-description">Enter the 6-digit code sent to your email address.</p>
+                </header>
                 <form onSubmit={verify} className="auth-form">
                     <div className="auth-field">
                         <label htmlFor="email">Email</label>
