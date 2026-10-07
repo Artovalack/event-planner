@@ -37,15 +37,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(dashboard)/loading.js"
     ],
-    "/(dashboard)/guests/page": [
+    "/(dashboard)/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(dashboard)/guests/page.js"
-    ],
-    "/(public)/register/[eventId]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(public)/register/[eventId]/page.js"
+      "static/chunks/app/(dashboard)/dashboard/page.js"
     ]
   }
 }

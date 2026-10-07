@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import Sidebar from '../../components/layout/Sidebar';
-import WorkspaceHeader from '../../components/layout/WorkspaceHeader';
+import WorkspaceHeaderLoader from '../../components/layout/WorkspaceHeaderLoader';
 import EventChatbot from '../../components/ai/EventChatbot';
+import OnboardingTourLoader from '@/components/layout/OnboardingTourLoader';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { getPlannerEvents, getCurrentUserId, getActiveEventCookieName } from '@/lib/planner';
@@ -27,10 +28,11 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
         <div className={`dashboard-shell ${inter.className}`}>
             <Sidebar activeRole={activeRole} isViewer={isViewer} />
             <div className="dashboard-main">
-                <WorkspaceHeader events={events} activeEventId={activeEvent?.id ?? null} />
+                <WorkspaceHeaderLoader events={events} activeEventId={activeEvent?.id ?? null} />
                 <main className="dashboard-content">{children}</main>
             </div>
             <EventChatbot />
+            <OnboardingTourLoader />
         </div>
     );
 };

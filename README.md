@@ -166,6 +166,8 @@ After `public.events` exists, paste the full contents of [`supabase/migrations/2
 
 The app keeps a selected event for the signed-in session and scopes each feature query and mutation to that event. This starter is configured for per-user privacy: each event stores the authenticated owner and all related planner data is only accessible through events that belong to that user.
 
+New email/password accounts see a short, skippable feature tour the first time they enter the workspace. New OAuth accounts receive the same tour after their first sign-in. The choice to finish or skip the tour is saved to that account, and existing accounts are not shown it.
+
 The `/tasks`, `/guests`, `/budget`, `/vendors`, and `/dashboard` routes use server-side initial data fetching and authenticated server actions. Dashboard and list print buttons open the browser's print dialog, where a user can choose **Save as PDF** for event summaries, guest lists, or task summaries.
 
 ### Get your Supabase keys

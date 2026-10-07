@@ -3,234 +3,134 @@
     "0c3254a93ceb18dfd7905ac3f30b7a1c5b995901": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "115ff40ca7896477543d38d4d58926dd1cd1eae6": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "1af798337d1a4018914b325e2748ca510c1abff9": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "1c9bbe80fc6a3e32c12b61d8f9c42c32fd334833": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "247190ca7831f319d9302affb74997bc8ade841f": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "2c49947bf15fa84c308fb96530bdecc197e88b0e": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "2e8c417b6af866ca3c58d9b3d038e527159dbd17": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "9a8f015bdcb402b16976f1dd5c3f4ffa5b7ebc7b": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "a2380c3aeb88cd7a573a474856b9bac53931ee9c": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "b9563c043273fb9fd6901f5f241012480e9d0a8a": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "c9bc5e405ab5b7993c333ded3a78b09f350fc5d6": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "d4793e8e63868ac0be873526f31ed459ae4b7059": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     },
     "e1036b741adbc9272784a6e5861f05c9c14246d8": {
       "workers": {
         "app/(dashboard)/events/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!",
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
+        "app/(dashboard)/dashboard/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(dashboard)/events/page": "action-browser",
-        "app/(dashboard)/guests/page": "action-browser"
-      }
-    },
-    "215da6acafd28c8ad9d769b8f77520118fd79f2f": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!",
-        "app/(public)/register/[eventId]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser",
-        "app/(public)/register/[eventId]/page": "action-browser"
-      }
-    },
-    "46d69f510bf82ad15541af99b9fc8dedada0fb2b": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!",
-        "app/(public)/register/[eventId]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser",
-        "app/(public)/register/[eventId]/page": "action-browser"
-      }
-    },
-    "7683716459e35216e9da24d06ceacf9a7f52a5d6": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!",
-        "app/(public)/register/[eventId]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser",
-        "app/(public)/register/[eventId]/page": "action-browser"
-      }
-    },
-    "97233e9593ea76efea0c69f576047aa7a23756db": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!",
-        "app/(public)/register/[eventId]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser",
-        "app/(public)/register/[eventId]/page": "action-browser"
-      }
-    },
-    "cc07c71576257b65acca4b02909228b73f7abdea": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!",
-        "app/(public)/register/[eventId]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser",
-        "app/(public)/register/[eventId]/page": "action-browser"
-      }
-    },
-    "eb1b1c58910afb2ba60fd2e298c006684fbf9981": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!",
-        "app/(public)/register/[eventId]/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser",
-        "app/(public)/register/[eventId]/page": "action-browser"
-      }
-    },
-    "01306137ab50f1c1b99f3a44b152d65e9d4fbc1b": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser"
-      }
-    },
-    "3ea86385c4a37acaed76eef86d1b4e7221dbd0d7": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser"
-      }
-    },
-    "4e8c454bde1c7502dfd1a2a694a3ae896d569e93": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser"
-      }
-    },
-    "8f9dac7475c207522c9384008d7d4be0636981e8": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser"
-      }
-    },
-    "a79e767a31ac48fab66c7fbeedcd12fe50c09957": {
-      "workers": {
-        "app/(dashboard)/guests/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fplanner.ts%22%2C%5B%22deleteTask%22%2C%22deleteScheduleItem%22%2C%22saveGuest%22%2C%22saveBudgetItem%22%2C%22deleteVendor%22%2C%22saveTask%22%2C%22setTaskStatus%22%2C%22saveScheduleItem%22%2C%22setSubtaskStatus%22%2C%22setActiveEvent%22%2C%22saveVendor%22%2C%22deleteBudgetItem%22%2C%22deleteGuest%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Frsvp.ts%22%2C%5B%22submitPublicRsvp%22%2C%22submitPublicEventRegistration%22%2C%22reviewPublicEventRegistration%22%2C%22createPublicRegistrationLink%22%2C%22createGuestRsvpLink%22%2C%22disablePublicRegistrationLink%22%5D%5D%2C%5B%22%2Fhome%2Fartovalack%2Frepos%2Fevent-planner%2Fsrc%2Factions%2Fvendor-operations.ts%22%2C%5B%22deleteVendorContract%22%2C%22saveVendorContract%22%2C%22setVendorPaymentStatus%22%2C%22saveVendorPaymentMilestone%22%2C%22deleteVendorPaymentMilestone%22%5D%5D%5D&__client_imported__=true!"
-      },
-      "layer": {
-        "app/(dashboard)/guests/page": "action-browser"
+        "app/(dashboard)/dashboard/page": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "wzJAXGP1SCAAKyUN3DNUiTJI+YkPTGSA8LFFHpEHeIc="
+  "encryptionKey": "loPsFpDO8gELLysy1kIKVKXTZhLztxfDps+KP+P7YmI="
 }

@@ -58,6 +58,9 @@ const SignupPage = () => {
             const { data, error } = await getSupabaseClient().auth.signUp({
                 email,
                 password,
+                options: {
+                    data: { onboarding_tour: 'pending' },
+                },
             });
 
             if (error) {
