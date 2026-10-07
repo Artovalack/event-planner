@@ -17,11 +17,9 @@ export async function getCurrentUserId() {
 
 export async function getPlannerEvents(): Promise<EventRow[]> {
     const supabase = getSupabaseServerClient();
-    const userId = await getCurrentUserId();
     const { data, error } = await supabase
         .from('events')
         .select('*')
-        .eq('user_id', userId)
         .order('date', { ascending: true, nullsFirst: false });
 
     if (error) throw new Error(`Unable to load events: ${error.message}`);
@@ -36,4 +34,11 @@ export async function getActiveEvent(): Promise<EventRow | null> {
     if (selected) return selected;
 
     return events.find((event) => event.date && new Date(event.date).getTime() >= Date.now()) ?? events[0] ?? null;
+}
+
+export async function getEventRole(eventId: string): Promise<'admin' | 'collaborator' | 'viewer' | null> {
+    const { data, error } = await getSupabaseServerClient().rpc('get_event_role', { p_event_id: eventId });
+    if (error) throw new Error(`Unable to load event permissions: ${error.message}`);
+    if (data === 'admin' || data === 'collaborator' || data === 'viewer') return data;
+    return null;
 }

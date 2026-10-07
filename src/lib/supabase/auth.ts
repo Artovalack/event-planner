@@ -25,10 +25,14 @@ export function getAuthErrorMessage(error: unknown, fallback: string): string {
 }
 
 export async function signInWithOAuth(provider: OAuthProvider) {
+    const requestedNext = new URLSearchParams(window.location.search).get('next');
+    const nextPath = requestedNext && requestedNext.startsWith('/') && !requestedNext.startsWith('//') && !requestedNext.includes('\\')
+        ? requestedNext
+        : '/events';
     return getSupabaseClient().auth.signInWithOAuth({
         provider,
         options: {
-            redirectTo: `${window.location.origin}/auth/callback`,
+            redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
         },
     });
 }

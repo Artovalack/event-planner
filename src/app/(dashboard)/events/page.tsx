@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import EventCard from '../../../components/events/EventCard';
 import { createEvent, deleteEvent, getEvents, updateEvent } from '../../../actions/events';
 import type { EventInput, EventRow } from '../../../types/database';
+import { CalendarPlus, ChevronDown, Plus, RefreshCw } from 'lucide-react';
 
 type EventFormValues = {
     title: string;
@@ -129,11 +130,18 @@ const EventsPage = () => {
                     <h1>Upcoming events</h1>
                     <p className="page-subtitle">Plan the details and keep everyone on the same page.</p>
                 </div>
-                <span className="event-count">{events.length} {events.length === 1 ? 'event' : 'events'}</span>
+                <span className="event-count"><CalendarPlus size={15} />{events.length} {events.length === 1 ? 'event' : 'events'}</span>
             </header>
 
-            <section className="event-form-card" aria-labelledby="event-form-title">
-                <h2 id="event-form-title">{editingEvent ? 'Edit event' : 'Create an event'}</h2>
+            <details className="event-form-card event-form-disclosure" open={editingEvent ? true : undefined}>
+                <summary>
+                    <span className="event-form-summary-icon"><Plus size={17} /></span>
+                    <span className="event-form-summary-copy">
+                        <strong id="event-form-title">{editingEvent ? 'Edit event' : 'Create an event'}</strong>
+                        <small>{editingEvent ? 'Update the event details below.' : 'Add a new event to your workspace.'}</small>
+                    </span>
+                    <ChevronDown className="event-form-summary-chevron" size={18} />
+                </summary>
                 <form className="event-form" onSubmit={handleSubmit}>
                     <label className="event-field event-field-wide">
                         <span>Event name</span>
@@ -186,20 +194,22 @@ const EventsPage = () => {
                         )}
                     </div>
                 </form>
-            </section>
+            </details>
 
             <div className="events-section-heading">
                 <div>
                     <h2>All events</h2>
                     <p>Browse and manage your planned events.</p>
                 </div>
-                <button className="text-button" type="button" onClick={() => void loadEvents()} disabled={loading}>
-                    Refresh
+                <button className="text-button event-refresh" type="button" onClick={() => void loadEvents()} disabled={loading}>
+                    <RefreshCw size={15} className={loading ? 'spin' : ''} /> Refresh
                 </button>
             </div>
 
             {loading ? (
-                <p className="empty-state">Loading your events…</p>
+                <div className="event-grid" aria-label="Loading events">
+                    {[0, 1, 2].map((item) => <div className="event-card event-skeleton" key={item}><span /><span /><span /></div>)}
+                </div>
             ) : error && events.length === 0 ? (
                 <p className="form-message form-message-error" role="alert">{error}</p>
             ) : events.length === 0 ? (

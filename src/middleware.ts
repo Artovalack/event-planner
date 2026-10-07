@@ -49,6 +49,7 @@ export async function middleware(request: NextRequest) {
         }
 
         const loginUrl = new URL('/login', request.url);
+        loginUrl.searchParams.set('next', `${request.nextUrl.pathname}${request.nextUrl.search}`);
         const redirectResponse = NextResponse.redirect(loginUrl);
         refreshedCookies.forEach(({ name, value, options }) => redirectResponse.cookies.set(name, value, options));
         return redirectResponse;
@@ -78,5 +79,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/events/:path*', '/dashboard/:path*', '/tasks/:path*', '/guests/:path*', '/budget/:path*', '/vendors/:path*', '/mfa/:path*', '/api/:path*'],
+    matcher: ['/events/:path*', '/dashboard/:path*', '/activity/:path*', '/notifications/:path*', '/tasks/:path*', '/guests/:path*', '/budget/:path*', '/vendors/:path*', '/settings/:path*', '/calendar/:path*', '/timeline/:path*', '/invite/:path*', '/mfa/:path*', '/api/:path*'],
 };

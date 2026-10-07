@@ -5,9 +5,12 @@ import Link from 'next/link';
 import { getSupabaseClient } from '@/lib/supabase/client';
 import { getAuthErrorMessage } from '@/lib/supabase/auth';
 
-export default function VerifyOtpPage({ searchParams }: { searchParams: { email?: string; type?: string } }) {
+export default function VerifyOtpPage({ searchParams }: { searchParams: { email?: string; type?: string; next?: string } }) {
     const initialEmail = searchParams.email ?? '';
     const type: 'email' | 'signup' = searchParams.type === 'email' ? 'email' : 'signup';
+    const nextPath = searchParams.next && searchParams.next.startsWith('/') && !searchParams.next.startsWith('//') && !searchParams.next.includes('\\')
+        ? searchParams.next
+        : '/events';
     const [email, setEmail] = useState(initialEmail);
     const [token, setToken] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -29,7 +32,7 @@ export default function VerifyOtpPage({ searchParams }: { searchParams: { email?
                 setError(getAuthErrorMessage(verifyError, 'Unable to verify this code.'));
                 return;
             }
-            window.location.replace('/events');
+            window.location.replace(nextPath);
         } catch (caughtError) {
             setError(getAuthErrorMessage(caughtError, 'Unable to verify this code.'));
         } finally {

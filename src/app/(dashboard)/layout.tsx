@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react';
 import Sidebar from '../../components/layout/Sidebar';
+import WorkspaceHeader from '../../components/layout/WorkspaceHeader';
 import EventChatbot from '../../components/ai/EventChatbot';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { getPlannerEvents, getCurrentUserId, getActiveEventCookieName } from '@/lib/planner';
+import { getSupabaseServerClient } from '@/lib/supabase/server';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,13 +17,19 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
         ?? events.find((event) => event.date && new Date(event.date).getTime() >= Date.now())
         ?? events[0]
         ?? null;
+    const { data: activeRole, error: roleError } = activeEvent
+        ? await getSupabaseServerClient().rpc('get_event_role', { p_event_id: activeEvent.id })
+        : { data: null, error: null };
+    if (roleError) throw new Error(`Unable to load active event role: ${roleError.message}`);
+    const isViewer = activeRole === 'viewer';
 
     return (
-        <div className={`flex min-h-screen flex-col md:flex-row ${inter.className}`}>
-            <Sidebar events={events} activeEventId={activeEvent?.id ?? null} />
-            <main className="flex-1 p-4">
-                {children}
-            </main>
+        <div className={`dashboard-shell ${inter.className}`}>
+            <Sidebar activeRole={activeRole} isViewer={isViewer} />
+            <div className="dashboard-main">
+                <WorkspaceHeader events={events} activeEventId={activeEvent?.id ?? null} />
+                <main className="dashboard-content">{children}</main>
+            </div>
             <EventChatbot />
         </div>
     );
