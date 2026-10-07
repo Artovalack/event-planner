@@ -1,10 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import EventCard from '../../../components/events/EventCard';
+import ConfirmDialog from '../../../components/ui/ConfirmDialog';
 import { createEvent, deleteEvent, getEvents, updateEvent } from '../../../actions/events';
 import type { EventInput, EventRow } from '../../../types/database';
-import { AlertTriangle, CalendarPlus, ChevronDown, Plus, RefreshCw, Trash2 } from 'lucide-react';
+import { CalendarPlus, ChevronDown, Plus, RefreshCw } from 'lucide-react';
 
 type EventFormValues = {
     title: string;
@@ -29,13 +30,7 @@ const EventsPage = () => {
     const [saving, setSaving] = useState(false);
     const [deletingEventId, setDeletingEventId] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [deleteError, setDeleteError] = useState<string | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
-    const cancelDeleteButtonRef = useRef<HTMLButtonElement>(null);
-    const confirmDeleteButtonRef = useRef<HTMLButtonElement>(null);
-    const restoreDeleteFocusRef = useRef<HTMLElement | null>(null);
-    const isDeletingEventRef = useRef(false);
-    isDeletingEventRef.current = Boolean(deletingEventId);
 
     const loadEvents = useCallback(async () => {
         try {
@@ -100,18 +95,15 @@ const EventsPage = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleDelete = async (event: EventRow) => {
-        restoreDeleteFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-        setDeleteError(null);
+    const handleDelete = (event: EventRow) => {
         setEventPendingDelete(event);
     };
 
     const confirmDelete = async () => {
-        if (!eventPendingDelete) return;
+        if (!eventPendingDelete) return false;
         const event = eventPendingDelete;
 
         setDeletingEventId(event.id);
-        setDeleteError(null);
         setError(null);
         setNotice(null);
 
@@ -122,46 +114,16 @@ const EventsPage = () => {
                 setForm(emptyForm);
             }
             setNotice('Event deleted.');
-            setEventPendingDelete(null);
             await loadEvents();
+            return true;
         } catch (deleteError) {
             const message = deleteError instanceof Error ? deleteError.message : 'Unable to delete this event.';
-            setDeleteError(message);
             setError(message);
+            return false;
         } finally {
             setDeletingEventId(null);
         }
     };
-
-    useEffect(() => {
-        if (!eventPendingDelete) {
-            restoreDeleteFocusRef.current?.focus();
-            restoreDeleteFocusRef.current = null;
-            return;
-        }
-
-        cancelDeleteButtonRef.current?.focus();
-        const handleDialogKeyDown = (keyboardEvent: KeyboardEvent) => {
-            if (keyboardEvent.key === 'Escape' && !isDeletingEventRef.current) {
-                setEventPendingDelete(null);
-            }
-            if (keyboardEvent.key === 'Tab') {
-                const firstButton = cancelDeleteButtonRef.current;
-                const lastButton = confirmDeleteButtonRef.current;
-                if (!firstButton || !lastButton) return;
-                if (keyboardEvent.shiftKey && document.activeElement === firstButton) {
-                    keyboardEvent.preventDefault();
-                    lastButton.focus();
-                } else if (!keyboardEvent.shiftKey && document.activeElement === lastButton) {
-                    keyboardEvent.preventDefault();
-                    firstButton.focus();
-                }
-            }
-        };
-
-        document.addEventListener('keydown', handleDialogKeyDown);
-        return () => document.removeEventListener('keydown', handleDialogKeyDown);
-    }, [eventPendingDelete]);
 
     const cancelEdit = () => {
         setEditingEvent(null);
@@ -281,52 +243,14 @@ const EventsPage = () => {
                     </div>
                 </>
             )}
-            {eventPendingDelete && (
-                <div
-                    className="event-delete-backdrop"
-                    onMouseDown={(mouseEvent) => {
-                        if (mouseEvent.target === mouseEvent.currentTarget && !deletingEventId) {
-                            setEventPendingDelete(null);
-                        }
-                    }}
-                >
-                    <section
-                        className="event-delete-dialog"
-                        role="alertdialog"
-                        aria-modal="true"
-                        aria-labelledby="event-delete-title"
-                        aria-describedby="event-delete-description"
-                    >
-                        <div className="event-delete-icon"><AlertTriangle size={22} aria-hidden="true" /></div>
-                        <h2 id="event-delete-title">Delete this event?</h2>
-                        <p id="event-delete-description">
-                            <strong>{eventPendingDelete.title}</strong> will be permanently deleted. This action cannot be undone.
-                        </p>
-                        {deleteError && <p className="event-delete-error" role="alert">{deleteError}</p>}
-                        <div className="event-delete-actions">
-                            <button
-                                ref={cancelDeleteButtonRef}
-                                className="secondary-button"
-                                type="button"
-                                onClick={() => setEventPendingDelete(null)}
-                                disabled={Boolean(deletingEventId)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                ref={confirmDeleteButtonRef}
-                                className="event-delete-confirm"
-                                type="button"
-                                onClick={() => void confirmDelete()}
-                                disabled={Boolean(deletingEventId)}
-                            >
-                                <Trash2 size={15} aria-hidden="true" />
-                                {deletingEventId === eventPendingDelete.id ? 'Deleting…' : 'Delete event'}
-                            </button>
-                        </div>
-                    </section>
-                </div>
-            )}
+            {eventPendingDelete && <ConfirmDialog
+                title="Delete this event?"
+                description={<><strong>{eventPendingDelete.title}</strong> will be permanently deleted. This action cannot be undone.</>}
+                confirmLabel="Delete event"
+                error={error}
+                onConfirm={confirmDelete}
+                onClose={() => setEventPendingDelete(null)}
+            />}
         </section>
     );
 };

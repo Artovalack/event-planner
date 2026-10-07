@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import { getSupabaseClient } from '@/lib/supabase/client';
 
 type TotpFactor = {
@@ -34,6 +35,7 @@ export default function MfaManager({ initialChallenge = false }: { initialChalle
     const [error, setError] = useState<string | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
     const [busy, setBusy] = useState(false);
+    const [factorPendingRemoval, setFactorPendingRemoval] = useState<string | null>(null);
 
     const loadFactors = async () => {
         const supabase = getSupabaseClient();
@@ -134,18 +136,20 @@ export default function MfaManager({ initialChallenge = false }: { initialChalle
         }
     };
 
-    const removeFactor = async (factorId: string) => {
-        if (!window.confirm('Remove this authenticator from your account?')) return;
+    const removeFactor = async () => {
+        if (!factorPendingRemoval) return false;
         setBusy(true);
         setError(null);
         setNotice(null);
         try {
-            const { error: unenrollError } = await getSupabaseClient().auth.mfa.unenroll({ factorId });
+            const { error: unenrollError } = await getSupabaseClient().auth.mfa.unenroll({ factorId: factorPendingRemoval });
             if (unenrollError) throw unenrollError;
             await loadFactors();
             setNotice('Authenticator removed.');
+            return true;
         } catch (caughtError) {
             setError(caughtError instanceof Error ? caughtError.message : 'Unable to remove this authenticator.');
+            return false;
         } finally {
             setBusy(false);
         }
@@ -172,7 +176,7 @@ export default function MfaManager({ initialChallenge = false }: { initialChalle
                         {factors.map((factor) => (
                             <div className="mfa-factor-row" key={factor.id}>
                                 <span>{factor.friendly_name || 'Authenticator app'} <small>Enabled</small></span>
-                                <button type="button" className="danger-button" disabled={busy} onClick={() => void removeFactor(factor.id)}>Remove</button>
+                                <button type="button" className="danger-button" disabled={busy} onClick={() => setFactorPendingRemoval(factor.id)}>Remove</button>
                             </div>
                         ))}
                         {!factors.length && <p className="auth-description">No authenticator app is currently enabled.</p>}
@@ -214,6 +218,14 @@ export default function MfaManager({ initialChallenge = false }: { initialChalle
                 {!challengeMode && !enrollment && notice && <p className="auth-success" role="status">{notice}</p>}
                 {!challengeMode && !enrollment && error && <p className="auth-error" role="alert">{error}</p>}
             </section>
+            {factorPendingRemoval && <ConfirmDialog
+                title="Remove authenticator?"
+                description="This authenticator will no longer be able to provide verification codes for your account."
+                confirmLabel="Remove authenticator"
+                error={error}
+                onConfirm={removeFactor}
+                onClose={() => setFactorPendingRemoval(null)}
+            />}
         </main>
     );
 }

@@ -1,8 +1,8 @@
-// File: /home/artovalack/repos/event-planner/src/app/(auth)/mfa/page.tsx
-import * as entry from '../../../../../src/app/(auth)/mfa/page.js'
+// File: /home/artovalack/repos/event-planner/src/app/(dashboard)/guests/page.tsx
+import * as entry from '../../../../../src/app/(dashboard)/guests/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../../src/app/(auth)/mfa/page.js')
+type TEntry = typeof import('../../../../../src/app/(dashboard)/guests/page.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

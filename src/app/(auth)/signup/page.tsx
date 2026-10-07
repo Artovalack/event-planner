@@ -79,7 +79,7 @@ const SignupPage = () => {
     };
 
     return (
-        <main className="auth-page">
+        <main className="auth-page auth-signup-page">
             <aside className="auth-brand-panel" aria-label="Event Planner">
                 <Link href="/" className="auth-brand"><BrandLockup /></Link>
                 <div className="auth-brand-copy">

@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useTransition, type DragEvent, type FormEvent } from 'react';
 import { assignGuestToTable, deleteSeatingTable, saveSeatingTable } from '@/actions/seating';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import type { GuestRow, SeatingAssignmentRow, SeatingTableRow } from '@/types/database';
 
 type TableForm = { name: string; capacity: string; shape: 'round' | 'rectangle' };
@@ -86,6 +87,7 @@ export default function SeatingPlanner({
     const [search, setSearch] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
+    const [tablePendingDelete, setTablePendingDelete] = useState<SeatingTableRow | null>(null);
     const [busy, startTransition] = useTransition();
     const [draggingGuestId, setDraggingGuestId] = useState<string | null>(null);
     const assignedTableByGuest = useMemo(
@@ -162,20 +164,25 @@ export default function SeatingPlanner({
     };
 
     const removeTable = (table: SeatingTableRow) => {
-        if (!window.confirm(`Delete ${table.name}? Its guest assignments will become unassigned.`)) return;
+        setTablePendingDelete(table);
+    };
+
+    const confirmRemoveTable = async () => {
+        if (!tablePendingDelete) return false;
+        const table = tablePendingDelete;
         clearMessages();
-        startTransition(async () => {
-            try {
-                await deleteSeatingTable(eventId, table.id);
-                if (editingTable?.id === table.id) {
-                    setEditingTable(null);
-                    setForm(emptyForm);
-                }
-                setNotice(`${table.name} deleted.`);
-            } catch (caughtError) {
-                setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete table.');
+        try {
+            await deleteSeatingTable(eventId, table.id);
+            if (editingTable?.id === table.id) {
+                setEditingTable(null);
+                setForm(emptyForm);
             }
-        });
+            setNotice(`${table.name} deleted.`);
+            return true;
+        } catch (caughtError) {
+            setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete table.');
+            return false;
+        }
     };
 
     const tableSeats = (tableId: string) => assignments.reduce((total, assignment) => {
@@ -274,6 +281,14 @@ export default function SeatingPlanner({
                     })}
                 </section>
             </div>
+            {tablePendingDelete && <ConfirmDialog
+                title={`Delete ${tablePendingDelete.name}?`}
+                description="Its guest assignments will become unassigned."
+                confirmLabel="Delete table"
+                error={error}
+                onConfirm={confirmRemoveTable}
+                onClose={() => setTablePendingDelete(null)}
+            />}
         </div>
     );
 }

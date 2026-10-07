@@ -14,13 +14,14 @@ import {
     setTaskStatus,
 } from '@/actions/planner';
 import { createGuestRsvpLink } from '@/actions/rsvp';
+import PublicRegistrationManager from '@/components/rsvp/PublicRegistrationManager';
 import PrintButton from '@/components/planner/PrintButton';
 import BudgetAllocator from '@/components/budget/BudgetAllocator';
 import VendorOutreach from '@/components/vendors/VendorOutreach';
 import VendorOperations from '@/components/vendors/VendorOperations';
 import Link from 'next/link';
 import { downloadCsv, exportSlug } from '@/lib/csv';
-import type { BudgetItemRow, EventRow, GuestRow, TaskRow, VendorContractRow, VendorPaymentMilestoneRow, VendorRow } from '@/types/database';
+import type { BudgetItemRow, EventRegistrationRequestRow, EventRow, GuestRow, TaskRow, VendorContractRow, VendorPaymentMilestoneRow, VendorRow } from '@/types/database';
 
 type Kind = 'tasks' | 'guests' | 'budget' | 'vendors';
 
@@ -30,6 +31,7 @@ type Props = {
     canEdit?: boolean;
     tasks?: TaskRow[];
     guests?: GuestRow[];
+    registrationRequests?: EventRegistrationRequestRow[];
     budgetItems?: BudgetItemRow[];
     vendors?: VendorRow[];
     paymentMilestones?: VendorPaymentMilestoneRow[];
@@ -45,7 +47,12 @@ const money = (amount: number, currencyCode = 'USD') => new Intl.NumberFormat(un
 export default function PlannerSection(props: Props) {
     const canEdit = props.canEdit ?? true;
     if (props.kind === 'tasks') return <TasksSection event={props.event} tasks={props.tasks ?? []} canEdit={canEdit} />;
-    if (props.kind === 'guests') return <GuestsSection event={props.event} guests={props.guests ?? []} canEdit={canEdit} />;
+    if (props.kind === 'guests') return <GuestsSection
+        event={props.event}
+        guests={props.guests ?? []}
+        registrationRequests={props.registrationRequests ?? []}
+        canEdit={canEdit}
+    />;
     if (props.kind === 'budget') return <BudgetSection event={props.event} items={props.budgetItems ?? []} paymentMilestones={props.paymentMilestones ?? []} canEdit={canEdit} />;
     return <VendorsSection
         event={props.event}
@@ -175,7 +182,12 @@ function TasksSection({ event, tasks, canEdit }: { event: EventRow; tasks: TaskR
     );
 }
 
-function GuestsSection({ event, guests, canEdit }: { event: EventRow; guests: GuestRow[]; canEdit: boolean }) {
+function GuestsSection({ event, guests, registrationRequests, canEdit }: {
+    event: EventRow;
+    guests: GuestRow[];
+    registrationRequests: EventRegistrationRequestRow[];
+    canEdit: boolean;
+}) {
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState('all');
     const [tagFilter, setTagFilter] = useState('all');
@@ -260,6 +272,7 @@ function GuestsSection({ event, guests, canEdit }: { event: EventRow; guests: Gu
 
     return <section className="planner-page">
         <header className="page-heading"><div><p className="eyebrow">{event.title}</p><h1>Guests</h1><p className="page-subtitle">Manage invitations and keep track of everyone attending.</p></div><div className="planner-header-actions"><PrintButton /><button className="secondary-button" type="button" onClick={exportGuests}>Export CSV</button><Link className="secondary-button" href="/guests/seating">Seating planner</Link>{canEdit && <button className="primary-button" type="button" onClick={() => { setEditing(null); setFormOpen(true); setError(''); }}>+ Add guest</button>}</div></header>
+        {canEdit && <PublicRegistrationManager eventId={event.id} enabled={Boolean(event.public_registration_enabled)} requests={registrationRequests} />}
         <div className="metric-grid metric-grid-compact">
             <Metric label="Guests" value={guests.length} detail="In this event" />
             <Metric label="Adults" value={companions.adults} detail="Companions" />

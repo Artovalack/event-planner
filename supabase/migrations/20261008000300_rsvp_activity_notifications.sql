@@ -6,6 +6,8 @@ set search_path = pg_catalog
 as $$
 declare
   row_data jsonb;
+  old_row_data jsonb;
+  new_row_data jsonb;
   selected_event_id uuid;
   selected_actor_id uuid := auth.uid();
   selected_action text;
@@ -16,15 +18,17 @@ begin
     selected_action := 'deleted';
   elsif tg_op = 'UPDATE' then
     row_data := to_jsonb(new);
+    old_row_data := to_jsonb(old);
+    new_row_data := row_data;
     selected_action := 'updated';
     if selected_entity_type = 'guest' and (
-      old.rsvp_status is distinct from new.rsvp_status
-      or old.rsvp_companion_adults is distinct from new.rsvp_companion_adults
-      or old.rsvp_companion_children is distinct from new.rsvp_companion_children
-      or old.rsvp_companion_babies is distinct from new.rsvp_companion_babies
-      or old.meal_preference is distinct from new.meal_preference
-      or old.allergies is distinct from new.allergies
-      or old.rsvp_updated_at is distinct from new.rsvp_updated_at
+      old_row_data -> 'rsvp_status' is distinct from new_row_data -> 'rsvp_status'
+      or old_row_data -> 'rsvp_companion_adults' is distinct from new_row_data -> 'rsvp_companion_adults'
+      or old_row_data -> 'rsvp_companion_children' is distinct from new_row_data -> 'rsvp_companion_children'
+      or old_row_data -> 'rsvp_companion_babies' is distinct from new_row_data -> 'rsvp_companion_babies'
+      or old_row_data -> 'meal_preference' is distinct from new_row_data -> 'meal_preference'
+      or old_row_data -> 'allergies' is distinct from new_row_data -> 'allergies'
+      or old_row_data -> 'rsvp_updated_at' is distinct from new_row_data -> 'rsvp_updated_at'
     ) then
       selected_entity_type := 'guest RSVP';
     end if;

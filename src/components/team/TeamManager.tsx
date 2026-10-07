@@ -3,9 +3,16 @@
 import { useState, useTransition, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { createWorkspaceInvitation, removeWorkspaceMember, revokeWorkspaceInvitation } from '@/actions/team';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 type TeamMember = { user_id: string; email: string; role: 'collaborator' | 'viewer'; joined_at: string };
 type Invitation = { id: string; email: string; role: 'collaborator' | 'viewer'; created_at: string; expires_at: string };
+type PendingConfirmation = {
+    title: string;
+    description: string;
+    confirmLabel: string;
+    execute: () => Promise<boolean>;
+};
 
 export default function TeamManager({
     eventId,
@@ -29,6 +36,7 @@ export default function TeamManager({
     const [notice, setNotice] = useState('');
     const [error, setError] = useState('');
     const [busy, startTransition] = useTransition();
+    const [confirmation, setConfirmation] = useState<PendingConfirmation | null>(null);
 
     const createInvite = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -57,32 +65,44 @@ export default function TeamManager({
     };
 
     const revoke = (invitation: Invitation) => {
-        if (!window.confirm(`Revoke the invitation for ${invitation.email}?`)) return;
-        setError('');
-        setNotice('');
-        startTransition(async () => {
-            try {
-                await revokeWorkspaceInvitation(eventId, invitation.id);
-                setNotice(`Invitation for ${invitation.email} revoked.`);
-                router.refresh();
-            } catch (caughtError) {
-                setError(caughtError instanceof Error ? caughtError.message : 'Unable to revoke invitation.');
-            }
+        setConfirmation({
+            title: 'Revoke this invitation?',
+            description: `The invitation for ${invitation.email} will no longer be valid.`,
+            confirmLabel: 'Revoke invitation',
+            execute: async () => {
+                setError('');
+                setNotice('');
+                try {
+                    await revokeWorkspaceInvitation(eventId, invitation.id);
+                    setNotice(`Invitation for ${invitation.email} revoked.`);
+                    router.refresh();
+                    return true;
+                } catch (caughtError) {
+                    setError(caughtError instanceof Error ? caughtError.message : 'Unable to revoke invitation.');
+                    return false;
+                }
+            },
         });
     };
 
     const removeMember = (member: TeamMember) => {
-        if (!window.confirm(`Remove ${member.email} from ${eventTitle}?`)) return;
-        setError('');
-        setNotice('');
-        startTransition(async () => {
-            try {
-                await removeWorkspaceMember(eventId, member.user_id);
-                setNotice(`${member.email} no longer has access.`);
-                router.refresh();
-            } catch (caughtError) {
-                setError(caughtError instanceof Error ? caughtError.message : 'Unable to remove workspace member.');
-            }
+        setConfirmation({
+            title: 'Remove this workspace member?',
+            description: `${member.email} will lose access to ${eventTitle}.`,
+            confirmLabel: 'Remove member',
+            execute: async () => {
+                setError('');
+                setNotice('');
+                try {
+                    await removeWorkspaceMember(eventId, member.user_id);
+                    setNotice(`${member.email} no longer has access.`);
+                    router.refresh();
+                    return true;
+                } catch (caughtError) {
+                    setError(caughtError instanceof Error ? caughtError.message : 'Unable to remove workspace member.');
+                    return false;
+                }
+            },
         });
     };
 
@@ -132,6 +152,14 @@ export default function TeamManager({
                 {!invitations.length && <p className="vendor-operation-empty">No pending invitations.</p>}
                 {invitations.map((invitation) => <div className="team-member-row" key={invitation.id}><div><strong>{invitation.email}</strong><span>{invitation.role} · expires {new Date(invitation.expires_at).toLocaleDateString()}</span></div><button className="danger-button" type="button" disabled={busy} onClick={() => revoke(invitation)}>Revoke</button></div>)}
             </section>}
+            {confirmation && <ConfirmDialog
+                title={confirmation.title}
+                description={confirmation.description}
+                confirmLabel={confirmation.confirmLabel}
+                error={error || null}
+                onConfirm={confirmation.execute}
+                onClose={() => setConfirmation(null)}
+            />}
         </div>
     );
 }

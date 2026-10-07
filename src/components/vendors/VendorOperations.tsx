@@ -8,6 +8,7 @@ import {
     saveVendorPaymentMilestone,
     setVendorPaymentStatus,
 } from '@/actions/vendor-operations';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import { getSupabaseClient } from '@/lib/supabase/client';
 import type { BudgetItemRow, VendorContractRow, VendorPaymentMilestoneRow, VendorRow } from '@/types/database';
 
@@ -17,6 +18,12 @@ type MilestoneForm = {
     dueAt: string;
     budgetItemId: string;
     notes: string;
+};
+type PendingConfirmation = {
+    title: string;
+    description: string;
+    confirmLabel: string;
+    execute: () => Promise<boolean>;
 };
 
 const blankMilestone: MilestoneForm = { label: '', amount: '', dueAt: '', budgetItemId: '', notes: '' };
@@ -63,6 +70,7 @@ export default function VendorOperations({
     const [error, setError] = useState<string | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
     const [downloadingId, setDownloadingId] = useState<string | null>(null);
+    const [confirmation, setConfirmation] = useState<PendingConfirmation | null>(null);
 
     const resetForm = () => {
         setForm(blankMilestone);
@@ -120,19 +128,27 @@ export default function VendorOperations({
         }
     };
 
-    const removeMilestone = async (milestone: VendorPaymentMilestoneRow) => {
-        if (!window.confirm(`Delete payment milestone "${milestone.label}"?`)) return;
-        setError(null);
-        setNotice(null);
-        setBusy(true);
-        try {
-            await deleteVendorPaymentMilestone(eventId, vendor.id, milestone.id);
-            setNotice('Payment milestone deleted.');
-        } catch (caughtError) {
-            setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete payment milestone.');
-        } finally {
-            setBusy(false);
-        }
+    const removeMilestone = (milestone: VendorPaymentMilestoneRow) => {
+        setConfirmation({
+            title: 'Delete this payment milestone?',
+            description: `"${milestone.label}" will be removed from the vendor payment schedule.`,
+            confirmLabel: 'Delete milestone',
+            execute: async () => {
+                setError(null);
+                setNotice(null);
+                setBusy(true);
+                try {
+                    await deleteVendorPaymentMilestone(eventId, vendor.id, milestone.id);
+                    setNotice('Payment milestone deleted.');
+                    return true;
+                } catch (caughtError) {
+                    setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete payment milestone.');
+                    return false;
+                } finally {
+                    setBusy(false);
+                }
+            },
+        });
     };
 
     const uploadContract = async (file: File) => {
@@ -207,21 +223,29 @@ export default function VendorOperations({
         }
     };
 
-    const removeContract = async (contract: VendorContractRow) => {
-        if (!window.confirm(`Delete contract "${contract.file_name}"?`)) return;
-        setError(null);
-        setNotice(null);
-        try {
-            const { storagePath } = await deleteVendorContract(eventId, vendor.id, contract.id);
-            const { error: storageError } = await getSupabaseClient().storage.from('vendor-contracts').remove([storagePath]);
-            if (storageError) {
-                setError(`Contract record removed, but stored file cleanup failed: ${storageError.message}`);
-                return;
-            }
-            setNotice('Contract deleted.');
-        } catch (caughtError) {
-            setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete contract.');
-        }
+    const removeContract = (contract: VendorContractRow) => {
+        setConfirmation({
+            title: 'Delete this contract?',
+            description: `"${contract.file_name}" will be removed from the contract vault.`,
+            confirmLabel: 'Delete contract',
+            execute: async () => {
+                setError(null);
+                setNotice(null);
+                try {
+                    const { storagePath } = await deleteVendorContract(eventId, vendor.id, contract.id);
+                    const { error: storageError } = await getSupabaseClient().storage.from('vendor-contracts').remove([storagePath]);
+                    if (storageError) {
+                        setError(`Contract record removed, but stored file cleanup failed: ${storageError.message}`);
+                    } else {
+                        setNotice('Contract deleted.');
+                    }
+                    return true;
+                } catch (caughtError) {
+                    setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete contract.');
+                    return false;
+                }
+            },
+        });
     };
 
     const itemNames = new Map(budgetItems.map((item) => [item.id, item.item_name]));
@@ -283,6 +307,14 @@ export default function VendorOperations({
             </section>
             {error && <p className="form-message form-message-error" role="alert">{error}</p>}
             {notice && <p className="form-message form-message-success" role="status">{notice}</p>}
+            {confirmation && <ConfirmDialog
+                title={confirmation.title}
+                description={confirmation.description}
+                confirmLabel={confirmation.confirmLabel}
+                error={error}
+                onConfirm={confirmation.execute}
+                onClose={() => setConfirmation(null)}
+            />}
         </div>
     );
 }

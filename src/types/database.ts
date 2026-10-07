@@ -10,6 +10,7 @@ export type EventRow = {
     venue_name?: string | null;
     venue_address?: string | null;
     banner_path?: string | null;
+    public_registration_enabled?: boolean;
     created_at?: string;
 };
 
@@ -58,6 +59,20 @@ export type GuestRow = {
     companion_babies: number;
     total_companions: number;
     created_at?: string;
+};
+
+export type EventRegistrationRequestRow = {
+    id: string;
+    event_id: string;
+    name: string;
+    email: string;
+    companion_adults: number;
+    companion_children: number;
+    companion_babies: number;
+    note: string | null;
+    status: 'pending' | 'approved' | 'declined';
+    created_at: string;
+    reviewed_at: string | null;
 };
 
 export type BudgetItemRow = {

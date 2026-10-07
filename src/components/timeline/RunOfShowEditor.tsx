@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { deleteScheduleItem, saveScheduleItem } from '@/actions/planner';
 import ScheduleGenerator from '@/components/timeline/ScheduleGenerator';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 import { formatTimeInTimezone, zonedDateTimeInput, zonedDateTimeToIso } from '@/lib/timezone';
 import type { ScheduleItemRow } from '@/types/database';
 
@@ -23,6 +24,7 @@ export default function RunOfShowEditor({ eventId, eventDate, timezone, venue, i
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
+    const [itemPendingDelete, setItemPendingDelete] = useState<ScheduleItemRow | null>(null);
 
     const edit = (item: ScheduleItemRow) => {
         setEditingId(item.id);
@@ -71,16 +73,23 @@ export default function RunOfShowEditor({ eventId, eventDate, timezone, venue, i
         }
     };
 
-    const remove = async (item: ScheduleItemRow) => {
-        if (!window.confirm(`Delete "${item.title}" from the run of show?`)) return;
+    const remove = (item: ScheduleItemRow) => {
+        setItemPendingDelete(item);
+    };
+
+    const confirmRemove = async () => {
+        if (!itemPendingDelete) return false;
+        const item = itemPendingDelete;
         setError(null);
         setNotice(null);
         try {
             await deleteScheduleItem(eventId, item.id);
             if (editingId === item.id) cancel();
             setNotice('Schedule item deleted.');
+            return true;
         } catch (caughtError) {
             setError(caughtError instanceof Error ? caughtError.message : 'Unable to delete the schedule item.');
+            return false;
         }
     };
 
@@ -140,6 +149,14 @@ export default function RunOfShowEditor({ eventId, eventDate, timezone, venue, i
                     </ol>
                 )}
             </section>
+            {itemPendingDelete && <ConfirmDialog
+                title="Delete this schedule item?"
+                description={<><strong>{itemPendingDelete.title}</strong> will be removed from the run of show.</>}
+                confirmLabel="Delete schedule item"
+                error={error}
+                onConfirm={confirmRemove}
+                onClose={() => setItemPendingDelete(null)}
+            />}
         </div>
     );
 }
