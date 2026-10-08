@@ -35,7 +35,13 @@ export default function EventChatbot() {
     return (
         <div className="assistant-widget">
             {!isOpen ? (
-                <button className="assistant-launcher" type="button" onClick={() => setIsOpen(true)}>
+                <button
+                    className="assistant-launcher"
+                    type="button"
+                    aria-label="Ask Assistant"
+                    title="Ask Assistant"
+                    onClick={() => setIsOpen(true)}
+                >
                     <span aria-hidden="true">✦</span>
                     Ask Assistant
                 </button>

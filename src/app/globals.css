@@ -5906,15 +5906,78 @@ html[data-theme="dark"] .event-skeleton span {
         min-height: 100vh;
         min-height: 100svh;
         align-content: center;
-        padding: 24px 18px;
+        padding: 20px 18px;
+    }
+
+    .auth-login-page .auth-brand {
+        gap: 10px;
+        padding: 8px 16px 9px 10px;
+    }
+
+    .auth-login-page .brand-symbol {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+    }
+
+    .auth-login-page > .auth-brand-panel {
+        min-height: 0;
+    }
+
+    .auth-login-page > .auth-card {
+        padding: 18px 18px;
+    }
+
+    .auth-login-page .auth-card-heading {
+        margin-bottom: 14px;
+    }
+
+    .auth-login-page .auth-form {
+        gap: 10px;
+    }
+
+    .auth-login-page .auth-input-wrap input,
+    .auth-login-page .auth-button {
+        min-height: 44px;
+    }
+
+    .auth-login-page .auth-secondary-action {
+        margin-top: 4px;
+    }
+
+    .auth-login-page .auth-divider {
+        margin: 8px 0;
+    }
+
+    .auth-login-page .auth-footer {
+        margin-top: 8px;
     }
 
     .event-grid {
         grid-template-columns: minmax(0, 1fr);
     }
 
+    .workspace-header {
+        min-height: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 10px 14px;
+    }
+
+    .workspace-breadcrumbs {
+        min-height: 20px;
+    }
+
     .workspace-header-actions {
-        gap: 6px;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .workspace-event-picker {
+        width: auto;
+        flex: 1 1 auto;
+        gap: 7px;
     }
 
     .workspace-breadcrumbs > span:first-child,
@@ -5922,20 +5985,16 @@ html[data-theme="dark"] .event-skeleton span {
         display: none;
     }
 
-    .workspace-event-picker {
-        width: min(320px, 53vw);
-        gap: 6px;
-    }
-
     .workspace-event-caption {
-        font-size: 0.5rem;
-        letter-spacing: 0.08em;
+        font-size: 0.56rem;
+        letter-spacing: 0.07em;
     }
 
     .workspace-event-select {
-        min-height: 42px;
-        gap: 8px;
-        padding: 4px 10px;
+        min-height: 40px;
+        flex: 1 1 auto;
+        gap: 7px;
+        padding: 4px 9px;
     }
 
     .dashboard-content {
@@ -5987,6 +6046,37 @@ html[data-theme="dark"] .event-skeleton span {
 
     .event-form-disclosure > .event-form .event-field-wide {
         grid-column: auto;
+    }
+
+    .sidebar-nav {
+        scroll-snap-type: x proximity;
+        scroll-padding-inline: 12px;
+    }
+
+    .sidebar-link {
+        scroll-snap-align: start;
+    }
+
+    .assistant-widget {
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+    }
+
+    .assistant-launcher {
+        width: 48px;
+        min-height: 48px;
+        justify-content: center;
+        padding: 0;
+        font-size: 0;
+    }
+
+    .assistant-launcher span {
+        font-size: 1.1rem;
+    }
+
+    .assistant-chat {
+        width: min(360px, calc(100vw - 24px));
+        height: min(500px, calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
     }
 }
 
