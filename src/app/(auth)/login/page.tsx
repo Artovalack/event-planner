@@ -55,6 +55,29 @@ const LoginPage = () => {
         <main className="auth-page auth-login-page">
             <aside className="auth-brand-panel" aria-label="Event Planner">
                 <Link href="/" className="auth-brand"><BrandLockup /></Link>
+                <div className="auth-artwork" aria-hidden="true">
+                    <div className="auth-artwork-orbit" />
+                    <div className="auth-artwork-card">
+                        <div className="auth-artwork-card-top">
+                            <span>EVENT PLAN</span>
+                            <span className="auth-artwork-status">ON TRACK</span>
+                        </div>
+                        <p className="auth-artwork-name">Maya &amp; Jordan</p>
+                        <div className="auth-artwork-date"><span>NOV</span><strong>14</strong><span>2026</span></div>
+                        <div className="auth-artwork-rule" />
+                        <div className="auth-artwork-row">
+                            <span className="auth-artwork-time">10:00</span>
+                            <span><b>Welcome brunch</b><i>Garden terrace</i></span>
+                            <i className="auth-artwork-dot" />
+                        </div>
+                        <div className="auth-artwork-row">
+                            <span className="auth-artwork-time">13:30</span>
+                            <span><b>Gather &amp; celebrate</b><i>Juniper House</i></span>
+                            <i className="auth-artwork-dot auth-artwork-dot-late" />
+                        </div>
+                    </div>
+                    <span className="auth-artwork-caption">THE DAY, IN GOOD HANDS</span>
+                </div>
                 <div className="auth-brand-copy">
                     <p className="eyebrow">PLAN WITH CLARITY</p>
                     <h2>Every detail,<br />beautifully in place.</h2>

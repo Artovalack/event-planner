@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "predev": "npx kill-port 3000",
+    "predev": "echo 'Skipping port cleanup'",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

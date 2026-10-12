@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, useTransition, type KeyboardEvent } from 'react';
 import { setActiveEvent } from '@/actions/planner';
-import { useTheme } from '@/components/settings/ThemeProvider';
+import { THEMES, useTheme, type Theme } from '@/components/settings/ThemeProvider';
 import type { EventRow } from '@/types/database';
-import { CalendarDays, Check, ChevronDown, Moon, Sun } from 'lucide-react';
+import { CalendarDays, Check, ChevronDown, Palette } from 'lucide-react';
 
 const routeLabels: Record<string, string> = {
     dashboard: 'Dashboard',
@@ -26,6 +26,14 @@ const routeLabels: Record<string, string> = {
     mfa: 'Security',
 };
 
+const themeLabels: Record<Theme, string> = {
+    tempo: 'Tempo',
+    gather: 'Gather',
+    meadow: 'Meadow',
+    afterglow: 'Afterglow',
+    daymark: 'Daymark',
+};
+
 export default function WorkspaceHeader({ events, activeEventId }: { events: EventRow[]; activeEventId: string | null }) {
     const pathname = usePathname();
     const router = useRouter();
@@ -39,6 +47,7 @@ export default function WorkspaceHeader({ events, activeEventId }: { events: Eve
     const currentRoute = pathname.split('/').filter(Boolean);
     const currentLabel = routeLabels[currentRoute[0]] ?? 'Workspace';
     const activeEvent = events.find((event) => event.id === activeEventId) ?? null;
+    const nextTheme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
 
     useEffect(() => {
         if (!eventMenuOpen) return;
@@ -184,11 +193,11 @@ export default function WorkspaceHeader({ events, activeEventId }: { events: Eve
                 <button
                     className="header-icon-button"
                     type="button"
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-                    title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+                    onClick={() => setTheme(nextTheme)}
+                    aria-label={`Current theme: ${themeLabels[theme]}. Switch to ${themeLabels[nextTheme]}`}
+                    title={`Current theme: ${themeLabels[theme]}. Click to switch to ${themeLabels[nextTheme]}`}
                 >
-                    {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+                    <Palette size={17} />
                 </button>
                 <Link className="workspace-avatar" href="/settings/account" aria-label="Open profile and preferences">EP</Link>
             </div>

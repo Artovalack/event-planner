@@ -3,12 +3,9 @@ import Sidebar from '../../components/layout/Sidebar';
 import WorkspaceHeaderLoader from '../../components/layout/WorkspaceHeaderLoader';
 import EventChatbot from '../../components/ai/EventChatbot';
 import OnboardingTourLoader from '@/components/layout/OnboardingTourLoader';
-import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { getPlannerEvents, getCurrentUserId, getActiveEventCookieName } from '@/lib/planner';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
     const userId = await getCurrentUserId();
@@ -25,7 +22,7 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
     const isViewer = activeRole === 'viewer';
 
     return (
-        <div className={`dashboard-shell ${inter.className}`}>
+        <div className="dashboard-shell">
             <Sidebar activeRole={activeRole} isViewer={isViewer} />
             <div className="dashboard-main">
                 <WorkspaceHeaderLoader events={events} activeEventId={activeEvent?.id ?? null} />
