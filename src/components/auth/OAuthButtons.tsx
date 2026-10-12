@@ -3,11 +3,19 @@
 import { useState } from 'react';
 import { signInWithOAuth, type OAuthProvider } from '@/lib/supabase/auth';
 
-export default function OAuthButtons({ disabled = false }: { disabled?: boolean }) {
+export default function OAuthButtons({
+    disabled = false,
+    onBeforeSignIn,
+}: {
+    disabled?: boolean;
+    onBeforeSignIn?: () => boolean;
+}) {
     const [error, setError] = useState<string | null>(null);
     const [pending, setPending] = useState<OAuthProvider | null>(null);
 
     const handleSignIn = async (provider: OAuthProvider) => {
+        if (onBeforeSignIn && !onBeforeSignIn()) return;
+
         setPending(provider);
         setError(null);
         try {
@@ -24,10 +32,10 @@ export default function OAuthButtons({ disabled = false }: { disabled?: boolean 
         <div className="oauth-section">
             <div className="auth-divider"><span>or continue with</span></div>
             <div className="oauth-buttons">
-                <button type="button" className="oauth-button" disabled={disabled || pending !== null} onClick={() => void handleSignIn('google')}>
+                <button type="button" className="oauth-button" aria-busy={pending === 'google'} disabled={disabled || pending !== null} onClick={() => void handleSignIn('google')}>
                     {pending === 'google' ? 'Connecting…' : 'Continue with Google'}
                 </button>
-                <button type="button" className="oauth-button" disabled={disabled || pending !== null} onClick={() => void handleSignIn('facebook')}>
+                <button type="button" className="oauth-button" aria-busy={pending === 'facebook'} disabled={disabled || pending !== null} onClick={() => void handleSignIn('facebook')}>
                     {pending === 'facebook' ? 'Connecting…' : 'Continue with Facebook'}
                 </button>
             </div>
